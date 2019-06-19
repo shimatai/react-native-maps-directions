@@ -106,7 +106,7 @@ Transit options example:
     strokeColor="hotpink"
     mode="TRANSIT"
     modeOptions={{
-      modes: [ 'BUS', 'RAIL', 'SUBWAY' ],
+      modes: [ 'BUS', 'RAIL' ],
       routingPreference: "LESS_WALKING"
     }}
   />
