@@ -84,10 +84,10 @@ Since the result rendered on screen is a `MapView.Polyline` component, all [`Map
     apikey={GOOGLE_MAPS_APIKEY}
     strokeWidth={3}
     strokeColor="hotpink"
-    modeOptions={
+    modeOptions={{
       departureTime: new Date( new Date().getTime() + (1 * 60 * 60 * 1000) ),
       trafficModel: "bestguess"
-    }
+    }}
   />
 </MapView>
 ```
