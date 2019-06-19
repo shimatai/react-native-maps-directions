@@ -8,7 +8,7 @@
 
 Directions component for [`react-native-maps`](https://github.com/airbnb/react-native-maps/) – Draw a route between two coordinates, powered by the Google Maps Directions API
 
-**This fork from `bramus/react-native-maps-directions` supports [mode options](https://developers.google.com/maps/documentation/javascript/directions#TravelModes) to be passed to Google Directions API.**
+**This fork from `bramus/react-native-maps-directions` supports [mode options](https://developers.google.com/maps/documentation/javascript/directions#TravelModes) for Travel Modes to be passed to Google Directions API.**
 
 ![react-native-maps-directions](https://user-images.githubusercontent.com/213073/33188062-efc86e24-d096-11e7-87eb-6925291bc809.png)
 
