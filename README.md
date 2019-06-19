@@ -8,6 +8,8 @@
 
 Directions component for [`react-native-maps`](https://github.com/airbnb/react-native-maps/) – Draw a route between two coordinates, powered by the Google Maps Directions API
 
+**This fork from `bramus/react-native-maps-directions` supports [mode options](https://developers.google.com/maps/documentation/javascript/directions#TravelModes) to be passed to Google Directions API.**
+
 ![react-native-maps-directions](https://user-images.githubusercontent.com/213073/33188062-efc86e24-d096-11e7-87eb-6925291bc809.png)
 
 ## Installation
@@ -17,13 +19,13 @@ Install `react-native-maps-directions` as a dependency using either
 - [Node's `npm`](https://nodejs.org/en/download/)
 
   ```
-  npm install react-native-maps-directions
+  npm install https://github.com/shimatai/react-native-maps-directions.git
   ```
 
 - [Yarn](https://yarnpkg.com/en/docs/install)
 
   ```
-  yarn add react-native-maps-directions
+  yarn add https://github.com/shimatai/react-native-maps-directions.git
   ```
 
 ## Basic Usage
@@ -198,7 +200,7 @@ class Example extends Component {
             onReady={result => {
               console.log('Distance: ${result.distance} km')
               console.log('Duration: ${result.duration} min.')
-              
+
               this.mapView.fitToCoordinates(result.coordinates, {
                 edgePadding: {
                   right: (width / 20),
