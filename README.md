@@ -85,6 +85,7 @@ Driving options example:
     apikey={GOOGLE_MAPS_APIKEY}
     strokeWidth={3}
     strokeColor="hotpink"
+    mode="DRIVING"
     modeOptions={{
       departureTime: new Date( new Date().getTime() + (1 * 60 * 60 * 1000) ),
       trafficModel: "bestguess"
@@ -103,6 +104,7 @@ Transit options example:
     apikey={GOOGLE_MAPS_APIKEY}
     strokeWidth={3}
     strokeColor="hotpink"
+    mode="TRANSIT"
     modeOptions={{
       modes: [ 'BUS', 'RAIL', 'SUBWAY' ],
       routingPreference: "LESS_WALKING"
