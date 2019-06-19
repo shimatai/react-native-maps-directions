@@ -208,6 +208,7 @@ class MapViewDirections extends Component {
 			mode, // eslint-disable-line no-unused-vars
 			language, // eslint-disable-line no-unused-vars
 			region,
+			modeOptions,
 			...props
 		} = this.props;
 
