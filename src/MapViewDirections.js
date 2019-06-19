@@ -25,7 +25,11 @@ class MapViewDirections extends Component {
 	}
 
 	componentWillReceiveProps(nextProps) {
-		if (!isEqual(nextProps.origin, this.props.origin) || !isEqual(nextProps.destination, this.props.destination) || !isEqual(nextProps.waypoints, this.props.waypoints) || !isEqual(nextProps.mode, this.props.mode)) {
+		if (!isEqual(nextProps.origin, this.props.origin) ||
+			  !isEqual(nextProps.destination, this.props.destination) ||
+				!isEqual(nextProps.waypoints, this.props.waypoints) ||
+				!isEqual(nextProps.mode, this.props.mode) ||
+				!isEqual(nextProps.modeOptions, this.props.modeOptions)) {
 			if (nextProps.resetOnChange === false) {
 				this.fetchAndRenderRoute(nextProps);
 			} else {
@@ -72,6 +76,7 @@ class MapViewDirections extends Component {
 			onReady,
 			onError,
 			mode = 'DRIVING',
+			modeOptions,
 			language = 'en',
 			optimizeWaypoints,
 			directionsServiceBaseUrl = 'https://maps.googleapis.com/maps/api/directions/json',
@@ -102,13 +107,36 @@ class MapViewDirections extends Component {
 			waypoints = `optimize:true|${waypoints}`;
 		}
 
+		let modeOpts = '';
+		if (modeOptions) {
+			if (modeOptions.arrivalTime) {
+				modeOpts += '&arrival_time=' + modeOptions.arrivalTime.getTime();
+			}
+
+			if (modeOptions.departureTime) {
+				modeOpts += '&departure_time=' + modeOptions.departureTime.getTime();
+			}
+
+			if (modeOptions.modes) {
+				modeOpts += '&transit_mode=' + modeOptions.modes.map(mode => mode.toLowerCase()).join('|');
+			}
+
+			if (modeOptions.routingPreference) {
+				modeOpts += '&transit_routing_preference=' + modeOptions.routingPreference.toLowerCase();
+			}
+
+			if (modeOptions.trafficModel) {
+				modeOpts += '&traffic_model=' + modeOptions.trafficModel.toLowerCase().replace('bestguess', 'best_guess');
+			}
+		}
+
 		onStart && onStart({
 			origin,
 			destination,
 			waypoints: waypoints ? waypoints.split('|') : [],
 		});
 
-		this.fetchRoute(directionsServiceBaseUrl, origin, waypoints, destination, apikey, mode, language, region)
+		this.fetchRoute(directionsServiceBaseUrl, origin, waypoints, destination, apikey, mode, language, region, modeOpts)
 			.then(result => {
 				if (!this._mounted) return;
 				this.setState(result);
@@ -121,12 +149,12 @@ class MapViewDirections extends Component {
 			});
 	}
 
-	fetchRoute(directionsServiceBaseUrl, origin, waypoints, destination, apikey, mode, language, region) {
+	fetchRoute(directionsServiceBaseUrl, origin, waypoints, destination, apikey, mode, language, region, modeOptions) {
 
 		// Define the URL to call. Only add default parameters to the URL if it's a string.
 		let url = directionsServiceBaseUrl;
 		if (typeof (directionsServiceBaseUrl) === 'string') {
-			url += `?origin=${origin}&waypoints=${waypoints}&destination=${destination}&key=${apikey}&mode=${mode.toLowerCase()}&language=${language}&region=${region}&departure_time=now`;
+			url += `?origin=${origin}&waypoints=${waypoints}&destination=${destination}&key=${apikey}&mode=${mode.toLowerCase()}&language=${language}&region=${region}&departure_time=now${modeOptions}`;
 		}
 
 		return fetch(url)
@@ -219,6 +247,7 @@ MapViewDirections.propTypes = {
 	onReady: PropTypes.func,
 	onError: PropTypes.func,
 	mode: PropTypes.oneOf(['DRIVING', 'BICYCLING', 'TRANSIT', 'WALKING']),
+	modeOptions: PropTypes.object,
 	language: PropTypes.string,
 	resetOnChange: PropTypes.bool,
 	optimizeWaypoints: PropTypes.bool,
