@@ -92,7 +92,7 @@ Driving options example:
   />
 </MapView>
 ```
-_Note: departure time must be set to the current time or some time in the future._
+_Note: departure time must be set to the current time or some time in the future (in this example, 1 hour from now)._
 
 Transit options example:
 ```js
