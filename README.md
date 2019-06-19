@@ -70,6 +70,7 @@ Once the directions in between `destination` and `origin` has been fetched, a `M
 | `optimizeWaypoints` | `boolean` | `false` | Set it to true if you would like Google Maps to re-order all the waypoints to optimize the route for the fastest route. Please be aware that if this option is enabled, you will be billed for a higher rate by Google as stated [here](https://developers.google.com/maps/documentation/javascript/directions#Waypoints).
 | `directionsServiceBaseUrl` | `string` | _(Google's)_ | Base URL of the Directions Service (API) you are using. By default the Google Directions API is used (`"https://maps.googleapis.com/maps/api/directions/json"`). Usually you won't need to change this.
 | `region` | `String` | | If you are using strings for **origin** or **destination**, sometimes you will get an incorrect route because Google Maps API needs the region where this places belong to. See [here](https://developers.google.com/maps/documentation/javascript/localization#Region) for more info.
+| `modeOptions` | `Object` | | Settings for mode options can be one of [Driving Options](https://developers.google.com/maps/documentation/javascript/directions#DrivingOptions) or [Transit Options](https://developers.google.com/maps/documentation/javascript/directions#TransitOptions)
 
 #### More props
 
@@ -83,6 +84,10 @@ Since the result rendered on screen is a `MapView.Polyline` component, all [`Map
     apikey={GOOGLE_MAPS_APIKEY}
     strokeWidth={3}
     strokeColor="hotpink"
+    modeOptions={
+      departureTime: new Date( new Date().getTime() + (1 * 60 * 60 * 1000) ),
+      trafficModel: "bestguess"
+    }
   />
 </MapView>
 ```
