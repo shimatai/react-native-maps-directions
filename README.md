@@ -76,6 +76,7 @@ Once the directions in between `destination` and `origin` has been fetched, a `M
 
 Since the result rendered on screen is a `MapView.Polyline` component, all [`MapView.Polyline` props](https://github.com/airbnb/react-native-maps/blob/master/docs/polyline.md#props) – except for `coordinates` – are also accepted.
 
+Driving options example:
 ```js
 <MapView initialRegion={…}>
   <MapViewDirections
@@ -87,6 +88,24 @@ Since the result rendered on screen is a `MapView.Polyline` component, all [`Map
     modeOptions={{
       departureTime: new Date( new Date().getTime() + (1 * 60 * 60 * 1000) ),
       trafficModel: "bestguess"
+    }}
+  />
+</MapView>
+```
+_Note: departure time must be set to the current time or some time in the future._
+
+Transit options example:
+```js
+<MapView initialRegion={…}>
+  <MapViewDirections
+    origin={origin}
+    destination={destination}
+    apikey={GOOGLE_MAPS_APIKEY}
+    strokeWidth={3}
+    strokeColor="hotpink"
+    modeOptions={{
+      modes: [ 'BUS', 'RAIL', 'SUBWAY' ],
+      routingPreference: "LESS_WALKING"
     }}
   />
 </MapView>
